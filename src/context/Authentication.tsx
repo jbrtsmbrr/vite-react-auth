@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { PrivateFetch } from "../utils/privateFetch..utils";
 
 export interface AuthenicatedUser {
   id: string;
@@ -38,7 +39,7 @@ export const AuthenticationProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     (async function () {
       setLoading(true);
-      const response = await fetch("http://localhost:4004/auth/current", {
+      const response = await PrivateFetch("http://localhost:4004/auth/current", {
         credentials: "include",
       });
       const result = (await response.json()) as {
