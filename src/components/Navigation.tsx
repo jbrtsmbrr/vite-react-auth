@@ -1,3 +1,5 @@
+import { PrivateFetch } from "../utils/privateFetch..utils";
+
 export function Navigation() {
   return (
     <div className="flex items-center justify-between p-2 px-6 bg-zinc-950 text-white">
@@ -20,6 +22,26 @@ export function Navigation() {
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
           className="mx-auto h-8 w-auto rounded-full"
         />
+        <button
+          onClick={async () => {
+            const response = await PrivateFetch(
+              "http://localhost:4004/auth/current",
+              {
+                credentials: "include",
+              }
+            );
+
+            const result = (await response.json()) as {
+              data: { user: { username: string } | null };
+              errors: { message: string }[];
+              success: boolean;
+            };
+
+            console.log(result);
+          }}
+        >
+          Check Current User
+        </button>
         <button
           onClick={async () => {
             const response = await fetch("http://localhost:4004/auth/logout", {
