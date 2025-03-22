@@ -3,6 +3,7 @@ import { Input } from "../../components/Input";
 import { Link, Navigate, useNavigate } from "react-router";
 import { useAuthentication } from "../../context/Authentication";
 import Logo from "../../components/Logo";
+import PasswordInput from "../../components/PasswordInput";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -122,7 +123,7 @@ export default function LoginPage() {
                 Password
               </label>
               <div className="mt-2">
-                <Input
+                <PasswordInput
                   id="password"
                   name="password"
                   type="password"
@@ -172,7 +173,7 @@ export default function LoginPage() {
         {/* Form footer */}
         <div>
           <p className="mt-10 text-center text-sm text-gray-900">
-            Not a member?{" "}
+            Not a member yet?{" "}
             <Link
               to="/register"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
