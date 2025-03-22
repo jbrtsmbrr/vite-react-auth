@@ -90,7 +90,7 @@ export default function RecoverAccountPage() {
     <div className="relative flex h-screen min-h-screen justify-evenly items-center">
       {/* Form */}
       <div className="relative flex min-h-full flex-1 flex-col justify-center px-6 py-4 lg:px-8">
-        <Link to="/" className="w-fit mx-auto py-4">
+        <Link reloadDocument to="/" className="w-fit mx-auto py-4">
           <Logo />
         </Link>
         <div className="flex flex-col items-center justify-center flex-1">
