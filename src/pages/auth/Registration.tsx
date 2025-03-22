@@ -3,6 +3,7 @@ import { Input } from "../../components/Input";
 import { Link, Navigate, useNavigate } from "react-router";
 import { useAuthentication } from "../../context/Authentication";
 import Logo from "../../components/Logo";
+import PasswordInput from "../../components/PasswordInput";
 
 export default function Registration() {
   const [name, setName] = useState("");
@@ -229,7 +230,7 @@ export default function Registration() {
                   Password
                 </label>
                 <div className="mt-2">
-                  <Input
+                  <PasswordInput
                     id="password"
                     name="password"
                     type="password"
@@ -250,7 +251,7 @@ export default function Registration() {
                   Password
                 </label>
                 <div className="mt-2">
-                  <Input
+                  <PasswordInput
                     id="confirm_password"
                     name="confirm_password"
                     type="password"
