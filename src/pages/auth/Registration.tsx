@@ -167,6 +167,7 @@ export default function Registration() {
                     required
                     autoComplete="Age"
                     placeholder="Enter your age"
+                    min={1}
                     disabled={loading}
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
