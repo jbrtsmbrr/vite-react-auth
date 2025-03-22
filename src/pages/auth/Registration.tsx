@@ -296,6 +296,7 @@ export default function Registration() {
             <p className="mt-10 text-center text-sm text-gray-900">
               Already have an account?{" "}
               <Link
+                reloadDocument
                 to="/login"
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
               >

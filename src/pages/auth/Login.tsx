@@ -139,7 +139,7 @@ export default function LoginPage() {
 
             {/* Forgot password */}
             <div>
-              <Link to="/forgot_password">
+              <Link reloadDocument to="/forgot_password">
                 <p className="text-right text-xs text-indigo-500 font-medium hover:text-indigo-400 tracking-wide">
                   Forgot password?
                 </p>
@@ -175,6 +175,7 @@ export default function LoginPage() {
           <p className="mt-10 text-center text-sm text-gray-900">
             Not a member yet?{" "}
             <Link
+              reloadDocument
               to="/register"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
