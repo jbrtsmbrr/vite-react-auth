@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Input } from "../../components/Input";
-import { Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { useAuthentication } from "../../context/Authentication";
+import Logo from "../../components/Logo";
 
 export default function Registration() {
   const [name, setName] = useState("");
@@ -9,6 +10,8 @@ export default function Registration() {
   const [age, setAge] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   //  Submition Status
   const [loading, setLoading] = useState(false);
@@ -28,6 +31,8 @@ export default function Registration() {
     setAge("");
     setUsername("");
     setPassword("");
+    setConfirmPassword("");
+    setEmail("");
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -44,6 +49,8 @@ export default function Registration() {
       age: data.get("age"),
       username: data.get("username"),
       password: data.get("password"),
+      confirm_password: data.get("confirm_password"),
+      email: data.get("email"),
     };
 
     // Submit form to API
@@ -78,154 +85,241 @@ export default function Registration() {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            alt="Your Company"
-            src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
-            className="mx-auto h-12 w-auto"
-          />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-            Register Account
-          </h2>
+      <div className="relative flex h-screen min-h-screen justify-evenly items-center">
+        {/* Form */}
+        <div className="relative flex min-h-full flex-1 flex-col justify-center px-6 py-4 lg:px-8">
+          <Link to="/" className="w-fit mx-auto py-4">
+            <Logo />
+          </Link>
+          <div className="flex flex-col items-center justify-center flex-1">
+            <div className="p-8 flex flex-col gap-2">
+              <p className="font-serif text-center text-4xl font-normal tracking-tight text-gray-900">
+                Welcome to ProTech
+              </p>
+              <p className="text-center text-sm text-gray-900">
+                Please fill out all required fields
+              </p>
+            </div>
+            <form
+              action="#"
+              method="POST"
+              className="space-y-2 w-1/2"
+              onSubmit={handleSubmit}
+            >
+              <div className="flex w-full gap-2">
+                <div className="flex-1">
+                  <label
+                    htmlFor="first_name"
+                    className="block font-semibold text-gray-800 tracking-wide text-xs/6"
+                  >
+                    Name
+                  </label>
+                  <div className="mt-2">
+                    <Input
+                      id="first_name"
+                      name="first_name"
+                      type="text"
+                      required
+                      autoComplete="first_name"
+                      placeholder="Enter your name"
+                      disabled={loading}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex-1">
+                  <label
+                    htmlFor="last_name"
+                    className="block font-semibold text-gray-800 tracking-wide text-xs/6"
+                  >
+                    Last Name
+                  </label>
+                  <div className="mt-2">
+                    <Input
+                      id="last_name"
+                      name="last_name"
+                      type="text"
+                      required
+                      autoComplete="last_name"
+                      placeholder="Enter your last name"
+                      disabled={loading}
+                      value={lastname}
+                      onChange={(e) => setLastname(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="Age"
+                  className="block font-semibold text-gray-800 tracking-wide text-xs/6"
+                >
+                  Age
+                </label>
+                <div className="mt-2">
+                  <Input
+                    id="Age"
+                    name="age"
+                    type="number"
+                    required
+                    autoComplete="Age"
+                    placeholder="Enter your age"
+                    disabled={loading}
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="flex w-full gap-2">
+                <div className="flex-1">
+                  <label
+                    htmlFor="email"
+                    className="block font-semibold text-gray-800 tracking-wide text-xs/6"
+                  >
+                    Email
+                  </label>
+                  <div className="mt-2">
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      placeholder="Enter your email"
+                      disabled={loading}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex-1">
+                  <label
+                    htmlFor="username"
+                    className="block font-semibold text-gray-800 tracking-wide text-xs/6"
+                  >
+                    Username
+                  </label>
+                  <div className="mt-2">
+                    <Input
+                      id="username"
+                      name="username"
+                      type="text"
+                      required
+                      autoComplete="username"
+                      placeholder="Enter your username"
+                      disabled={loading}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block font-semibold text-gray-800 tracking-wide text-xs/6"
+                >
+                  Password
+                </label>
+                <div className="mt-2">
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    placeholder="Enter your password"
+                    disabled={loading}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="confirm_password"
+                  className="block font-semibold text-gray-800 tracking-wide text-xs/6"
+                >
+                  Password
+                </label>
+                <div className="mt-2">
+                  <Input
+                    id="confirm_password"
+                    name="confirm_password"
+                    type="password"
+                    required
+                    placeholder="Confirm your password"
+                    disabled={loading}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="py-2">
+                <button
+                  disabled={loading}
+                  type="submit"
+                  className="disabled:bg-black/70 disabled:pointer-events-none flex w-full justify-center rounded-md cursor-pointer bg-black px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800"
+                >
+                  {loading ? "Sending Registration..." : "Submit Registration"}
+                </button>
+              </div>
+            </form>
+
+            {!loading && errors.length > 0 && (
+              <div className="w-1/2 p-2 bg-red-100/60 text-red-500 mt-2 border border-red-200/50 text-xs tracking-wider">
+                {errors.map((error) => (
+                  <p>{error}</p>
+                ))}
+              </div>
+            )}
+
+            {!loading && success && (
+              <div className="w-1/2 p-2 bg-green-50 text-green-600 mt-2 border border-green-300/50 text-xs tracking-wider">
+                <p>Great! Registration successful</p>
+              </div>
+            )}
+          </div>
+
+          {/* Form footer */}
+          <div>
+            <p className="mt-10 text-center text-sm text-gray-900">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
+                Sign in
+              </Link>
+            </p>
+          </div>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            action="#"
-            method="POST"
-            className="space-y-2"
-            onSubmit={handleSubmit}
-          >
-            <div>
-              <label
-                htmlFor="first_name"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Name
-              </label>
-              <div className="mt-2">
-                <Input
-                  id="first_name"
-                  name="first_name"
-                  type="text"
-                  required
-                  autoComplete="first_name"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="last_name"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Last Name
-              </label>
-              <div className="mt-2">
-                <Input
-                  id="last_name"
-                  name="last_name"
-                  type="text"
-                  required
-                  autoComplete="last_name"
-                  placeholder="Enter your last name"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="Age"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Age
-              </label>
-              <div className="mt-2">
-                <Input
-                  id="Age"
-                  name="age"
-                  type="number"
-                  required
-                  autoComplete="Age"
-                  placeholder="Enter your age"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="username"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Username
-              </label>
-              <div className="mt-2">
-                <Input
-                  id="username"
-                  name="username"
-                  type="text"
-                  required
-                  autoComplete="username"
-                  placeholder="Enter your username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm/6 font-medium text-gray-900"
-              >
-                Password
-              </label>
-              <div className="mt-2">
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div>
-              <button
-                disabled={loading}
-                type="submit"
-                className="disabled:bg-indigo-400 disabled:pointer-events-none flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                {loading ? "Sending Registration..." : "Send Registration"}
-              </button>
-            </div>
-          </form>
-
-          {!loading && errors.length > 0 && (
-            <div className="p-4 bg-red-100 text-red-500 mt-2 border border-red-300/50 text-sm tracking-wide">
-              {errors.map((error) => (
-                <p>{error}</p>
-              ))}
-            </div>
-          )}
-
-          {!loading && success && (
-            <div className="p-4 bg-green-50 text-green-600 mt-2 border border-green-300/50 text-sm tracking-wide">
-              <p>Successfully Registered!</p>
-            </div>
-          )}
+        {/* Side UI */}
+        <div className="bg-gray-500 flex-1 h-full">
+          <div
+            className="banner h-full"
+            style={{
+              background: "url(./src/assets/images/abstract.jpg)",
+              // height: "100vh",
+              // backgroundPosition: `65% 51%`,
+              backgroundRepeat: "no-repeat",
+              position: "relative",
+              backgroundSize: "100% 100%",
+            }}
+          ></div>
+          {/* <img
+          src="./src/assets/images/abstract.jpg"
+          className="h-full relative w-full object-fill"
+        /> */}
         </div>
       </div>
     </>
